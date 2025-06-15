@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Магазин{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- Можно добавить Google Fonts -->
+</head>
+<body style="background: #fff; color: #232234; font-family: 'Montserrat', Arial, sans-serif;">
+    <header style="background: #fff; border-bottom: 1px solid #eee;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 24px 0; display: flex; justify-content: space-between; align-items: center;">
+            <a href="/" style="font-weight: bold; color: #A185E8; font-size: 2rem; text-decoration: none;">LOGO</a>
+            <nav>
+                <a href="/" style="margin-right: 24px; color: #A185E8; text-decoration: none;">Главная</a>
+                <a href="/catalog/" style="margin-right: 24px; color: #A185E8; text-decoration: none;">Каталог</a>
+                <a href="/cart/" style="margin-right: 24px; color: #A185E8; text-decoration: none;">Корзина</a>
+                <a href="/contacts/" style="color: #A185E8; text-decoration: none;">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="max-width: 1200px; margin: 0 auto; padding: 40px 0;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer style="background: #A185E8; color: #fff; text-align: center; padding: 24px 0; margin-top: 48px;">
+        © 2025 Магазин. Все права защищены.
+    </footer>
+</body>
+</html>
