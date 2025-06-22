@@ -1,31 +1,104 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Магазин{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <!-- Можно добавить Google Fonts -->
 </head>
 <body style="background: #fff; color: #232234; font-family: 'Montserrat', Arial, sans-serif;">
-    <header style="background: #fff; border-bottom: 1px solid #eee;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 24px 0; display: flex; justify-content: space-between; align-items: center;">
-            <a href="/" style="font-weight: bold; color: #A185E8; font-size: 2rem; text-decoration: none;">LOGO</a>
-            <nav>
-                <a href="/" style="margin-right: 24px; color: #A185E8; text-decoration: none;">Главная</a>
-                <a href="/catalog/" style="margin-right: 24px; color: #A185E8; text-decoration: none;">Каталог</a>
-                <a href="/cart/" style="margin-right: 24px; color: #A185E8; text-decoration: none;">Корзина</a>
-                <a href="/contacts/" style="color: #A185E8; text-decoration: none;">Контакты</a>
-            </nav>
-        </div>
-    </header>
+    <header style="background: #ffffff; border-bottom: 1px solid #eee;">
 
-    <main style="max-width: 1200px; margin: 0 auto; padding: 40px 0;">
-        {% block content %}{% endblock %}
-    </main>
+    <div style="
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;">
+        
+        <!-- Логотип слева -->
+        <a href="/" class= "logo_fav">
+            D&D
+        </a>
+        
+        <!-- Меню по центру -->
 
-    <footer style="background: #A185E8; color: #fff; text-align: center; padding: 24px 0; margin-top: 48px;">
+
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li><a href="#">Главная</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-btn">Каталог</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Кожа</a></li>
+                    <li><a href="#">Игровые рукава</a></li>
+                    <li><a href="#">Одежда</a></li>
+                    <li><a href="#">Столы</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Контакты</a></li>
+        </ul>
+        <a href="#" class="cart-icon"><img src="img/cart.svg" alt="Корзина" /></a>
+    </nav>
+            
+        <!-- Корзина справа -->
+        <a href="/cart/" style="
+            display: flex;
+            align-items: center;
+            margin-left: 32px;">
+            <img src="{% static 'img/cart.svg' %}" alt="Корзина" class="cart">
+        </a>
+    </div>
+
+</header>
+
+<main class="main-content">
+
+{% block content %}{% endblock %}
+
+</main>
+    <!-- </main> -->
+
+<footer style="background: #A185E8; color: #fff; text-align: center; padding: 24px 0; margin-top: 48px;">
         © 2025 Магазин. Все права защищены.
-    </footer>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('catalogBtn');
+    const overlay = document.getElementById('catalogOverlay');
+    const dropdown = document.getElementById('catalogDropdown');
+
+    // Открытие по клику (или по наведению — раскомментируй если нужно)
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        overlay.classList.add('active');
+    });
+
+    // Скрытие по клику вне overlay/dropdown
+    document.addEventListener('mousedown', function(e) {
+        if (
+            overlay.classList.contains('active') &&
+            !dropdown.contains(e.target)
+        ) {
+            overlay.classList.remove('active');
+        }
+    });
+
+    // Дополнительно: закрытие по Esc
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            overlay.classList.remove('active');
+        }
+    });
+});
+</script>
+
 </body>
 </html>
