@@ -24,9 +24,9 @@ from django.conf.urls.static import static as static_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),            # ВАЖНО! Это подключает главную страницу /
-    # path('catalog/', include('catalog.urls')),
+    path('catalog/', include('catalog.urls')),
     # path('cart/', include('cart.urls')),
-    # path('contacts/', include('contacts.urls')),
+    path('contacts/', include('contacts.urls')),
     path(r'^favicon\.ico$', RedirectView.as_view(url=static('favicon.ico')))
 ] + static_urls(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

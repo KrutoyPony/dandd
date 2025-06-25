@@ -141,12 +141,11 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 48px;
     background: #fff;
     min-height: 72px;
     position: relative;
-    border-bottom: 1px solid #eeecfa;
     padding: 0 24px;
+    gap: 24px;
 }
 
 .nav-list {
@@ -174,6 +173,7 @@ footer {
     transition: background 0.18s, color 0.18s;
     letter-spacing: 0.3px;
 }
+
 
 .nav-list > li > a:hover,
 .dropdown-btn:hover,
