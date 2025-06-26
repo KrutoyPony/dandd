@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+<link href="{% static 'css/catalog_style.css' %}" rel="stylesheet">
+<h2 class="h2-catalog-title">Категории</h2>
+<div class="catalog-sections-grid">
+  {% for cat in categories %}
+    <a href="{% url 'product_list' cat.slug %}" class="section-tile">
+      {% if cat.image %}
+        <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+      {% endif %}
+      <span>{{ cat.name }}</span>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,24 +1,21 @@
-from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
+from main.models import Category, Product
+from django.shortcuts import redirect
 
-SECTIONS = [
-    {"name": "Кожа", "slug": "koja", "image": "catalog/img/photo_1.png"},
-    {"name": "Игровые рукава", "slug": "rukava", "image": "catalog/img/photo_2.png"},
-    {"name": "Одежда", "slug": "odezhda", "image": "catalog/img/photo_3.png"},
-    {"name": "Столы", "slug": "stoly", "image": "catalog/img/photo_4.png"},
-]
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'catalog/category_list.html', {'categories': categories})
 
-# Create your views here.
-def catalog_home(request):
-    return render(request, "catalog/catalog_home.html", {"sections": SECTIONS})
+def product_list(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    products = category.products.filter(is_available=True)
+    return render(request, 'catalog/product_list.html', {'category': category, 'products': products})
 
-def catalog_section(request, section_slug):
-    section = get_object_or_404(
-        {s["slug"]: s for s in SECTIONS}, section_slug
-    )
-    # Здесь подгрузи товары section, например, items = Item.objects.filter(section=section_slug)
-    items = []  # заменишь на свои товары
-    return render(request, "catalog/catalog_section.html", {
-        "section": section,
-        "items": items
-    })
+def product_detail(request, category_slug, product_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    product = get_object_or_404(Product, category=category, slug=product_slug)
+    return render(request, 'catalog/product_detail.html', {'category': category, 'product': product})
+
+def add_to_cart(request, product_id):
+    # Здесь логика корзины
+    return redirect(request.META.get('HTTP_REFERER', '/'))
