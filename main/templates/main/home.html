@@ -4,15 +4,17 @@
 {% load static %}
 {% block content %}
 
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <section>
-
-         <img src="{% static 'img/logo_main_transparent.png' %}" alt="Логотип"
-         class="logotype_main"
-         style="width: 250px; height: 250px; object-fit: contain; transition: transform 0.3s cubic-bezier(.36,2,.48,.96);">
-
-        <!-- <h1 style="color: #A185E8; font-size: 3rem; font-weight: 800;">Добро пожаловать в наш магазин!</h1> -->
-        <!-- <p style="font-size: 1.2rem; margin: 24px 0 32px;">Современные игровые аксессуары, одежда и мебель для сетапа</p> -->
-    </section>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <div class="main-hero">
+        <div class="main-hero-bg">
+            <img src="{% static 'img/P1070451.JPG' %}" alt="Рукав" class="hero-img hero-img-left" />
+            <img src="{% static 'img/photo_2025-06-26_23-06-29.jpg' %}" alt="Набор" class="hero-img hero-img-right" />
+            <div class="hero-glow"></div>
+    </div>
+    <div class="main-hero-center">
+        <img src="{% static 'img/logo_main_transparent.png' %}" alt="Логотип" class="hero-logo" />
+    </div>
+</div>
+  
 
 {% endblock %}

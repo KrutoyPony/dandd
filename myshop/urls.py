@@ -26,10 +26,9 @@ urlpatterns = [
     path('', include('main.urls')),            # ВАЖНО! Это подключает главную страницу /
     path('catalog/', include('catalog.urls')),
     path('contacts/', include('contacts.urls')),
+    path('cart/', include('cart.urls')),
     path(r'^favicon\.ico$', RedirectView.as_view(url=static('favicon.ico')))
 ] + static_urls(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static_urls(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

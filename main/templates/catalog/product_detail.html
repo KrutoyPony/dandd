@@ -1,7 +1,177 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% block content %}
-<link href="{% static 'css/catalog_style.css' %}" rel="stylesheet">
+
+
+
+<div class="product-detail-container">
+  <div class="product-gallery">
+    <div class="product-thumbs">
+      {% for image in product.images.all %}
+        <img src="{{ image.url }}" alt="{{ product.name }}" class="thumb {% if forloop.first %}active{% endif %}" onclick="showImage(this)">
+      {% endfor %}
+    </div>
+    <div class="product-main-image">
+      <img src="{{ product.main_image.url }}" id="mainProductImage" alt="{{ product.name }}">
+    </div>
+  </div>
+  <div class="product-info">
+    <h1 class="product-title">{{ product.name }}</h1>
+    <div class="product-price">{{ product.price }} ₽</div>
+    <form action="{% url 'add_to_cart' product.id %}" method="post" class="add-to-cart-form">
+      {% csrf_token %}
+      <div class="product-qty">
+        <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
+        <input type="number" name="quantity" id="qtyInput" min="1" value="1">
+        <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
+      </div>
+      <button type="submit" class="btn-primary">В корзину</button>
+    </form>
+    <div class="product-meta">
+      <div><b>Артикул:</b> {{ product.sku }}</div>
+      <div><b>Размеры:</b> {{ product.size }}</div>
+      <div><b>Материал:</b> {{ product.material }}</div>
+      <div><b>Плотность:</b> {{ product.density }}</div>
+    </div>
+    <div class="product-desc">{{ product.description|linebreaks }}</div>
+    <div class="product-share">
+      <!-- Сюда вставь свои кнопки соцсетей -->
+    </div>
+  </div>
+</div>
+
+<style>
+.product-detail-container {
+  display: flex;
+  gap: 56px;
+  max-width: 1100px;
+  margin: 60px auto 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+.product-gallery {
+  min-width: 340px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.product-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.product-thumbs .thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: 2px solid #e1dafc;
+  cursor: pointer;
+  object-fit: cover;
+  transition: border-color .2s;
+}
+.product-thumbs .thumb.active, .product-thumbs .thumb:hover {
+  border-color: #a78bfa;
+}
+.product-main-image img {
+  width: 340px;
+  height: 340px;
+  object-fit: contain;
+  border-radius: 36px;
+  background: #f7f4ff;
+}
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 320px;
+}
+.product-title {
+  font-size: 2.5rem;
+  color: #a78bfa;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.product-price {
+  font-size: 1.8rem;
+  color: #a78bfa;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.add-to-cart-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.product-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.qty-btn {
+  background: #e1dafc;
+  color: #a78bfa;
+  border: none;
+  border-radius: 10px;
+  padding: 4px 12px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+#qtyInput {
+  width: 48px;
+  text-align: center;
+  font-size: 1.2rem;
+  border: 1px solid #e1dafc;
+  border-radius: 6px;
+  padding: 2px;
+}
+.btn-primary {
+  background: #a78bfa;
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 10px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-primary:hover {
+  background: #7c51e7;
+}
+.product-meta {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 8px;
+}
+.product-desc {
+  color: #333;
+  font-size: 1.15rem;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+</style>
+<script>
+function showImage(el) {
+  document.getElementById('mainProductImage').src = el.src;
+  document.querySelectorAll('.product-thumbs .thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+function updateQty(diff) {
+  let input = document.getElementById('qtyInput');
+  let val = parseInt(input.value || 1);
+  val = Math.max(1, val + diff);
+  input.value = val;
+}
+</script>
+
+{% endblock %}
+
+
+<!-- <link href="{% static 'css/catalog_style.css' %}" rel="stylesheet">
 <div class="product-detail-wrapper">
     <div class="product-detail-gallery">
         {% if product.image %}
@@ -22,5 +192,5 @@
         </div>
         {% endif %}
     </div>
-</div>
-{% endblock %}
+</div> -->
+

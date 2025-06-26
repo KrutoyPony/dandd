@@ -1,0 +1,118 @@
+.main-hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: linear-gradient(100deg, #f6f3ff 30%, #ede6fc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-hero-bg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0; left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-img {
+  position: absolute;
+  top: 0; height: 100vh;
+  object-fit: cover;
+  z-index: 2;
+  transition: opacity .6s;
+}
+
+.hero-img-left {
+  left: 0; width: 56vw;
+  object-position: left center;
+  mask-image: linear-gradient(to right, #000 80%, transparent 100%);
+}
+
+.hero-img-right {
+  right: 0; width: 52vw;
+  object-position: right center;
+  mask-image: linear-gradient(to left, #000 80%, transparent 100%);
+}
+
+/* Свечение по центру */
+.hero-glow {
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 48vw; height: 48vw; min-width:340px; min-height:340px; max-width:600px; max-height:600px;
+  background: radial-gradient(ellipse at center, #fff9 0%, #f4efff77 60%, transparent 90%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Центровка содержимого */
+.main-hero-center {
+  position: relative;
+  z-index: 10;
+  width: 100vw; display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Логотип */
+.hero-logo {
+  width: 180px;
+  margin-bottom: 38px;
+  filter: drop-shadow(0 0 24px #c4bbfd88) drop-shadow(0 0 2px #fff);
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  padding: 24px;
+  transition: filter 0.5s;
+}
+.hero-logo:hover {
+  filter: drop-shadow(0 0 64px #a992ffbb) drop-shadow(0 0 32px #fff);
+}
+
+/* Кнопка */
+.hero-btn {
+  background: #b197fa;
+  color: #fff;
+  border-radius: 28px;
+  font-size: 1.18em;
+  padding: 14px 48px;
+  margin-top: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: .06em;
+  box-shadow: 0 2px 18px #baa9ff38;
+  border: none;
+  outline: none;
+  transition: background .25s, box-shadow .25s;
+}
+.hero-btn:hover {
+  background: #a089ef;
+  box-shadow: 0 4px 32px #bcb8ff52;
+}
+
+/* Слоган */
+.hero-slogan {
+  margin-top: 36px;
+  font-size: 1.07em;
+  color: #a79bbd;
+  letter-spacing: .09em;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+}
+
+/* --- Адаптив --- */
+@media (max-width: 900px) {
+  .hero-logo { width: 110px; padding: 13px; }
+  .hero-img-left, .hero-img-right { width: 60vw; }
+  .hero-glow { width: 60vw; height: 60vw; min-width:220px; min-height:220px; }
+}
+@media (max-width: 600px) {
+  .main-hero { min-height: 82vh; }
+  .main-hero-bg { height: 60vh; }
+  .hero-img { height: 55vh; }
+  .hero-logo { width: 65px; }
+  .hero-glow { width: 140px; height: 140px; }
+  .main-hero-center { margin-top: 20vh; }
+}

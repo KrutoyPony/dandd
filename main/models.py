@@ -25,6 +25,10 @@ class Product(models.Model):
     is_available = models.BooleanField(default=True, verbose_name="Доступен")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Создан")
     updated = models.DateTimeField(auto_now=True, verbose_name="Обновлён")
+    sku = models.TextField(blank=True, verbose_name="SKU")
+    size = models.TextField(blank=True, verbose_name="Размер")
+    material = models.TextField(blank=True, verbose_name="Материал")
+    density = models.TextField(blank=True, verbose_name="Плотность")
 
     class Meta:
         verbose_name = "Товар"
