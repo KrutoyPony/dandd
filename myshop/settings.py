@@ -24,14 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-on&q7y27)8lrz!0tha5a(6#^g4=uue1oa%htuw%j5qi^y(5ic*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["ddshop.pro", "www.ddshop.pro", "95.163.230.26", "localhost"]
+ALLOWED_HOSTS = ["ddshop.pro", "www.ddshop.pro", "localhost"]
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')     
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]    
        
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
